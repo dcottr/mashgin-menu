@@ -6,7 +6,7 @@ This is built using [T3 Stack](https://create.t3.gg/) and
 - [Prisma](https://prisma.io)
 - [tRPC](https://trpc.io)
 
-# Build Locally
+# Building Locally
 
 Make sure you've installed nvm, bun, and Docker.
 
