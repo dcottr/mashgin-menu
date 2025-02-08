@@ -11,11 +11,31 @@ export const menuRouter = createTRPCRouter({
       };
     }),
 
-  getMenu: publicProcedure.query(async ({ ctx }) => {
-    // const post = await ctx.db.post.findFirst({
-    //   orderBy: { createdAt: "desc" },
-    // });
+  getCategories: publicProcedure.query(async ({ ctx }) => {
+    if (!ctx.db) {
+      throw new Error("No database connection");
+    }
 
-    return { title: "Menu" };
+    const categories = await ctx.db.menuCategory.findMany({
+      select: {
+        id: true,
+        name: true,
+        imageURL: true,
+      },
+      orderBy: { createdAt: "desc" },
+      take: 30, // TODO: Paginate if we ever need more
+    });
+
+    return { categories };
+  }),
+  getCategoryItems: publicProcedure.query(async ({ ctx }) => {
+    const items = await ctx.db.menuItem.findFirst({
+      select: {
+        id: true,
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
+    return { items };
   }),
 });

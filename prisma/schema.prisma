@@ -9,3 +9,29 @@ datasource db {
     provider = "mysql"
     url      = env("DATABASE_URL")
 }
+
+model MenuCategory {
+    id       Int     @id @default(autoincrement())
+    name     String
+    imageURL String?
+
+    createdAt DateTime   @default(now())
+    updatedAt DateTime   @updatedAt
+    MenuItem  MenuItem[]
+
+    @@index([name])
+}
+
+model MenuItem {
+    id           Int          @id @default(autoincrement())
+    name         String
+    imageURL     String?
+    priceInCents Int
+    categoryID   Int
+    category     MenuCategory @relation(fields: [categoryID], references: [id])
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([name])
+}
