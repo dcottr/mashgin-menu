@@ -141,8 +141,7 @@
 }
 
 .quantityPicker {
-  width: 5rem;
-  max-width: 200px;
+  width: 3rem;
   padding: 10px;
   font-size: 16px;
   border: 2px solid #ddd;
