@@ -4,6 +4,7 @@ import { api } from "~/trpc/react";
 import Image from "next/image";
 import { useLocalStorage } from "~/app/hooks";
 import QuantityPicker from "~/app/_components/quantityPicker";
+import Payment from "~/app/_components/payment";
 
 export default function Cart() {
   // Cart is a record of item IDs to quantities. It will be null until it's loaded from local storage.
@@ -90,6 +91,11 @@ export default function Cart() {
           </div>
         ))}
       </div>
+      <Payment
+        onSubmit={(paymentData) => {
+          // TODO: Submit the payment
+        }}
+      />
     </div>
   ) : (cartItems.isLoading && itemIDsInCart.length > 0) || cart === null ? (
     <></>
