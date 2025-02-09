@@ -7,16 +7,16 @@ import { useLocalStorage } from "~/app/hooks";
 import QuantityPicker from "~/app/_components/quantityPicker";
 
 export function Items(props: { categoryID: number }) {
-  const [menuItems] = api.menu.getCategoryItems.useSuspenseQuery({
+  const categoryItems = api.menu.getCategoryItems.useQuery({
     categoryID: props.categoryID,
   });
 
   // Cart is a record of item IDs to quantities, as
   const [cart, setCart] = useLocalStorage<Record<number, number>>("cart", {});
 
-  return menuItems ? (
+  return categoryItems.data ? (
     <div className={styles.cardRow}>
-      {menuItems.items.map((item) => (
+      {categoryItems.data.items.map((item) => (
         <div key={item.id} className={styles.card}>
           <h3 className={styles.cardTitle}>{item.name}</h3>
 
@@ -48,7 +48,9 @@ export function Items(props: { categoryID: number }) {
         </div>
       ))}
     </div>
+  ) : categoryItems.isLoading ? (
+    <></> // TODO: spinner
   ) : (
-    <p className={styles.showcaseText}>You have no menu yet.</p>
+    <div>{"We're all out of stock, sorry!"}</div>
   );
 }

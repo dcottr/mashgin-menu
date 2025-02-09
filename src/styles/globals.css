@@ -15,3 +15,40 @@ a {
 * {
   box-sizing: border-box;
 }
+
+input[type="number"] {
+  width: 4rem;
+  max-width: 200px;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+  font-size: 1rem;
+  /* width: "3rem", */
+}
+
+/* Keep the default arrows while making them more visually appealing */
+input[type="number"]:hover {
+  border-color: #999;
+}
+
+input[type="number"]:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Enhance number input arrows on WebKit browsers */
+input[type="number"]::-webkit-inner-spin-button {
+  width: 1rem;
+  height: 2rem;
+  background: #f0f0f0;
+  border-radius: 4px;
+  cursor: pointer;
+  padding-left: 2px;
+}
+
+input[type="number"]::-webkit-inner-spin-button:hover {
+  background: #ddd;
+}

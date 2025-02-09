@@ -48,18 +48,12 @@
 }
 
 .title {
-  font-size: 3rem;
+  font-size: 2rem;
   line-height: 1;
   font-weight: 800;
   letter-spacing: -0.025em;
   margin: 0;
-  color: darkslateblue;
-}
-
-@media (min-width: 640px) {
-  .title {
-    font-size: 5rem;
-  }
+  color: #fff;
 }
 
 .cardRow {

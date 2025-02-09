@@ -22,23 +22,19 @@ export default function QuantityPicker(props: {
         gap: "0.5rem",
       }}
     >
-      <button
-        className={styles.borderlessButton}
-        onClick={(e) => props.setQuantity(0)}
-      >
-        <CloseIcon style={{ color: "red" }} />
-      </button>
       <input
         type="number"
         name="amount"
         min="0"
         value={props.quantity}
         onChange={(e) => props.setQuantity(+e.target.value)}
-        style={{
-          width: "3rem",
-          fontSize: "1rem",
-        }}
       />
+      <button
+        className={styles.borderlessButton}
+        onClick={(e) => props.setQuantity(0)}
+      >
+        <CloseIcon style={{ color: "red" }} />
+      </button>
     </div>
   );
 }
