@@ -19,19 +19,28 @@ export const menuRouter = createTRPCRouter({
         imageURL: true,
       },
       orderBy: { createdAt: "desc" },
-      take: 30, // Add pagination if we need more
+      take: 100, // Add pagination if we need more
     });
 
     return { categories };
   }),
-  getCategoryItems: publicProcedure.query(async ({ ctx }) => {
-    const items = await ctx.db.menuItem.findFirst({
-      select: {
-        id: true,
-      },
-      orderBy: { createdAt: "desc" },
-    });
+  getCategoryItems: publicProcedure
+    .input(z.object({ categoryID: z.number().int().gt(0) }))
+    .query(async ({ ctx, input }) => {
+      const items = await ctx.db.menuItem.findMany({
+        where: {
+          categoryID: input.categoryID,
+        },
+        select: {
+          id: true,
+          name: true,
+          imageURL: true,
+          priceInCents: true,
+        },
+        orderBy: { createdAt: "desc" },
+        take: 100, // Add pagination if we need more
+      });
 
-    return { items };
-  }),
+      return { items };
+    }),
 });

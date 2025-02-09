@@ -1,7 +1,7 @@
 "use client";
 
 import { api } from "~/trpc/react";
-import styles from "../index.module.css";
+import styles from "~/app/index.module.css";
 import Link from "next/link";
 import Image from "next/image";
 

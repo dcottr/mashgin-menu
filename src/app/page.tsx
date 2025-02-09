@@ -1,6 +1,6 @@
 import { Categories } from "~/app/_components/categories";
 import { HydrateClient } from "~/trpc/server";
-import styles from "./index.module.css";
+import styles from "~/app/index.module.css";
 
 export default async function Home() {
   return (
