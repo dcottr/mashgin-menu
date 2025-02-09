@@ -51,4 +51,23 @@ export const menuRouter = createTRPCRouter({
 
       return { items };
     }),
+  getCartItems: publicProcedure
+    .input(z.object({ itemIDs: z.array(z.number().int().gt(0)) }))
+    .query(async ({ ctx, input }) => {
+      const items = await ctx.db.menuItem.findMany({
+        where: {
+          id: { in: input.itemIDs },
+        },
+        select: {
+          id: true,
+          name: true,
+          imageURL: true,
+          priceInCents: true,
+        },
+        orderBy: { createdAt: "desc" },
+        take: 100, // Add pagination if we need more
+      });
+
+      return { items };
+    }),
 });

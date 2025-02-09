@@ -11,14 +11,21 @@ export function Items(props: { categoryID: number }) {
     categoryID: props.categoryID,
   });
 
-  // Cart is a record of item IDs to quantities, as
+  // Cart is a record of item IDs to quantities
   const [cart, setCart] = useLocalStorage<Record<number, number>>("cart", {});
 
-  return categoryItems.data ? (
+  return categoryItems.data?.items.length ? (
     <div className={styles.cardRow}>
       {categoryItems.data.items.map((item) => (
         <div key={item.id} className={styles.card}>
-          <h3 className={styles.cardTitle}>{item.name}</h3>
+          <Image
+            src={item.imageURL}
+            alt={item.name}
+            width={300}
+            height={300}
+            className={styles.cardImage}
+            priority
+          />
 
           <div
             style={{
@@ -28,23 +35,19 @@ export function Items(props: { categoryID: number }) {
               alignItems: "center",
             }}
           >
-            <h3 className={styles.cardTitle}>
-              ${(item.priceInCents / 100).toFixed(2)}
-            </h3>
-
+            {" "}
+            <h3 className={styles.cardTitle}>{item.name}</h3>
             <QuantityPicker
               quantity={cart[item.id] ?? 0}
-              setQuantity={(value) => setCart({ ...cart, [item.id]: value })}
+              setQuantity={(value) =>
+                // Set to undefined to wipe-out the key entry
+                setCart({ ...cart, [item.id]: value ?? undefined })
+              }
             />
           </div>
-          <Image
-            src={item.imageURL}
-            alt={item.name}
-            width={300}
-            height={300}
-            className={styles.cardImage}
-            priority
-          />
+          <h3 className={styles.cardTitle}>
+            ${(item.priceInCents / 100).toFixed(2)}
+          </h3>
         </div>
       ))}
     </div>

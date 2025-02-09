@@ -16,7 +16,6 @@ export function Categories() {
           className={styles.card}
           href={`/category/${category.id}`}
         >
-          <h3 className={styles.cardTitle}>{category.name} →</h3>
           <Image
             src={category.imageURL}
             alt={category.name}
@@ -25,6 +24,7 @@ export function Categories() {
             className={styles.cardImage}
             priority
           />
+          <h3 className={styles.cardTitle}>{category.name} →</h3>
         </Link>
       ))}
     </div>

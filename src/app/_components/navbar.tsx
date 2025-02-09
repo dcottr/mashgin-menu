@@ -1,10 +1,12 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import HomeIcon from "@mui/icons-material/Home";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import styles from "~/app/index.module.css";
 
-const Navbar = (props: { title: string }) => {
+const Navbar = (props: { title: string; hideCart?: boolean }) => {
   return (
     <>
       <div
@@ -23,10 +25,14 @@ const Navbar = (props: { title: string }) => {
         <Link href="/">
           <HomeIcon style={{ color: "white", fontSize: "2rem" }} />
         </Link>
-        <p className={styles.title}>{props.title}</p>
-        <Link href="/cart">
-          <ShoppingCartIcon style={{ color: "white", fontSize: "2rem" }} />
-        </Link>
+        <div className={styles.title}>{props.title}</div>
+        {props.hideCart ? (
+          <div></div>
+        ) : (
+          <Link href="/cart">
+            <ShoppingCartIcon style={{ color: "white", fontSize: "2rem" }} />
+          </Link>
+        )}
       </div>
     </>
   );
