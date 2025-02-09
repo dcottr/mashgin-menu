@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
+import styles from "~/app/index.module.css";
 import { api } from "~/trpc/react";
 import { useLocalStorage } from "~/app/hooks";
 import Payment from "~/app/cart/payment";
@@ -56,15 +57,7 @@ export default function Cart() {
   return (
     <>
       {errorMessage && (
-        <div
-          style={{
-            color: "red",
-            width: "100%",
-            textAlign: "center",
-            fontWeight: "bold",
-            padding: "1rem",
-          }}
-        >
+        <div className={styles.error}>
           <p>{errorMessage}</p>
         </div>
       )}

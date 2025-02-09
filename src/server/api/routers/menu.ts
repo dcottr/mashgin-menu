@@ -4,6 +4,7 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 const zPositiveInt = z.number().int().gt(0);
 
+// Endpoints types are validated with zod
 export const menuRouter = createTRPCRouter({
   getCategories: publicProcedure.query(async ({ ctx }) => {
     const categories = await ctx.db.menuCategory.findMany({

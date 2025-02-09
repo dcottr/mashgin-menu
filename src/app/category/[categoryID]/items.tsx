@@ -15,6 +15,12 @@ export function Items(props: { categoryID: number }) {
   // Cart is a record of item IDs to quantities
   const [cart, setCart] = useLocalStorage<Record<number, number>>("cart", {});
 
+  if (categoryItems.error) {
+    <div className={styles.error}>
+      <p>{categoryItems.error.message}</p>
+    </div>;
+  }
+
   return categoryItems.data?.items.length ? (
     <div className={styles.cardRow}>
       {categoryItems.data.items.map((item) => (

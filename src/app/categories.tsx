@@ -6,11 +6,17 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Categories() {
-  const [menuCategories] = api.menu.getCategories.useSuspenseQuery();
+  const categories = api.menu.getCategories.useQuery();
 
-  return menuCategories ? (
+  if (categories.error) {
+    <div className={styles.error}>
+      <p>{categories.error.message}</p>
+    </div>;
+  }
+
+  return categories.data ? (
     <div className={styles.cardRow}>
-      {menuCategories.categories.map((category) => (
+      {categories.data.categories.map((category) => (
         <Link
           key={category.id}
           className={styles.card}
@@ -28,7 +34,9 @@ export default function Categories() {
         </Link>
       ))}
     </div>
+  ) : categories.isLoading ? (
+    <></> // TODO: spinner
   ) : (
-    <p className={styles.showcaseText}>You have no menu yet.</p>
+    <div>{"No categories to choose from, check back later!"}</div>
   );
 }
