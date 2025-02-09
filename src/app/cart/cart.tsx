@@ -4,7 +4,7 @@ import { api } from "~/trpc/react";
 import Image from "next/image";
 import { useLocalStorage } from "~/app/hooks";
 import QuantityPicker from "~/app/_components/quantityPicker";
-import Payment from "~/app/_components/payment";
+import Payment from "~/app/cart/payment";
 import { useEffect, useState } from "react";
 import { error } from "console";
 

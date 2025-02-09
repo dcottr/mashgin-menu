@@ -1,5 +1,4 @@
 import { HydrateClient } from "~/trpc/server";
-import styles from "~/app/index.module.css";
 import Navbar from "~/app/_components/navbar";
 import Cart from "~/app/cart/cart";
 

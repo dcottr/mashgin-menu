@@ -1,4 +1,4 @@
-import { Categories } from "~/app/_components/categories";
+import { Categories } from "~/app/categories";
 import { HydrateClient } from "~/trpc/server";
 import styles from "~/app/index.module.css";
 import Navbar from "~/app/_components/navbar";

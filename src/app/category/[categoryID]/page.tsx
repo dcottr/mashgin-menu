@@ -1,4 +1,4 @@
-import { Items } from "~/app/_components/items";
+import { Items } from "~/app/category/[categoryID]/items";
 import { HydrateClient } from "~/trpc/server";
 import styles from "~/app/index.module.css";
 import { notFound } from "next/navigation";
