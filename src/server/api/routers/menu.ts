@@ -90,7 +90,7 @@ export const menuRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      // TODO: Do some final validation, process the payment, and send the order to the kitchen
+      // TODO: Do some final validation of CC, process the payment, and send the order to the kitchen
       console.log("Received order: ", input);
       return { success: true };
     }),

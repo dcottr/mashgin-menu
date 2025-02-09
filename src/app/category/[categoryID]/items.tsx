@@ -1,8 +1,9 @@
 "use client";
 
+import Image from "next/image";
+
 import { api } from "~/trpc/react";
 import styles from "~/app/index.module.css";
-import Image from "next/image";
 import { useLocalStorage } from "~/app/hooks";
 import QuantityPicker from "~/app/_components/quantityPicker";
 

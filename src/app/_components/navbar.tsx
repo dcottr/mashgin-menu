@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
 import HomeIcon from "@mui/icons-material/Home";
+import Link from "next/link";
+import React from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
 import styles from "~/app/index.module.css";
 
 const Navbar = (props: { title: string; hideCart?: boolean }) => {

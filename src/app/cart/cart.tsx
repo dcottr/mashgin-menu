@@ -1,11 +1,12 @@
 "use client";
 
-import { api } from "~/trpc/react";
-import Image from "next/image";
-import { useLocalStorage } from "~/app/hooks";
-import QuantityPicker from "~/app/_components/quantityPicker";
-import Payment from "~/app/cart/payment";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+
+import { api } from "~/trpc/react";
+import { useLocalStorage } from "~/app/hooks";
+import Payment from "~/app/cart/payment";
+import QuantityPicker from "~/app/_components/quantityPicker";
 
 export default function Cart() {
   // Cart is a record of item IDs to quantities. It will be null until it's loaded from local storage.

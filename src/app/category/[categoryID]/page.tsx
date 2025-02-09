@@ -1,10 +1,9 @@
 "use client";
 
+import { useParams, notFound } from "next/navigation";
 import { Items } from "~/app/category/[categoryID]/items";
 import styles from "~/app/index.module.css";
-import { notFound } from "next/navigation";
 import Header from "~/app/category/[categoryID]/header";
-import { useParams } from "next/navigation";
 
 export default function Page() {
   const { categoryID } = useParams();

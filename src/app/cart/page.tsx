@@ -1,7 +1,7 @@
 "use client";
-import Navbar from "~/app/_components/navbar";
 import dynamic from "next/dynamic";
 
+import Navbar from "~/app/_components/navbar";
 const Cart = dynamic(() => import("~/app/cart/cart"), {
   ssr: false,
 });

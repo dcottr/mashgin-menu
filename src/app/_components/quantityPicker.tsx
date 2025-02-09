@@ -1,5 +1,5 @@
-import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
+import CloseIcon from "@mui/icons-material/Close";
 import styles from "~/app/index.module.css";
 
 export default function QuantityPicker(props: {
