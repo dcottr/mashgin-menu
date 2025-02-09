@@ -43,7 +43,7 @@ model OrderItem {
     itemID   Int
     item     MenuItem @relation(fields: [itemID], references: [id])
     orderId  Int
-    order    Order?   @relation(fields: [orderId], references: [id])
+    order    Order    @relation(fields: [orderId], references: [id])
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
@@ -51,8 +51,26 @@ model OrderItem {
     @@index([id])
 }
 
+model PaymentDetails {
+    id          Int    @id @default(autoincrement())
+    cardNumber  String
+    expiryMonth Int
+    expiryYear  Int
+    cvv         Int
+    nameOnCard  String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    order Order[]
+
+    @@index([id])
+}
+
 model Order {
-    id Int @id @default(autoincrement())
+    id               Int            @id @default(autoincrement())
+    paymentDetailsID Int
+    paymentDetails   PaymentDetails @relation(fields: [paymentDetailsID], references: [id])
 
     createdAt DateTime    @default(now())
     updatedAt DateTime    @updatedAt
