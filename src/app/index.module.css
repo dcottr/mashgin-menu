@@ -102,3 +102,29 @@
   font-weight: 700;
   margin: 0;
 }
+
+.cardImage {
+  object-fit: cover;
+}
+
+.borderlessButton {
+  background: none;
+  border: none;
+}
+
+.styledButton {
+  background-color: slateblue;
+  color: white;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border-color: slateblue;
+}
+
+.borderlessButton:hover,
+.styledButton:hover {
+  cursor: pointer;
+  transition: background-color 150ms cubic-bezier(0.5, 0, 0.2, 1);
+  filter: brightness(130%);
+}

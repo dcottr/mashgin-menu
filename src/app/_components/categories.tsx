@@ -6,11 +6,11 @@ import Link from "next/link";
 import Image from "next/image";
 
 export function Categories() {
-  const [menuData] = api.menu.getCategories.useSuspenseQuery();
+  const [menuCategories] = api.menu.getCategories.useSuspenseQuery();
 
-  return menuData ? (
+  return menuCategories ? (
     <div className={styles.cardRow}>
-      {menuData.categories.map((category) => (
+      {menuCategories.categories.map((category) => (
         <Link
           key={category.id}
           className={styles.card}
@@ -22,7 +22,8 @@ export function Categories() {
             alt={category.name}
             width={300}
             height={300}
-            objectFit="cover"
+            className={styles.cardImage}
+            priority
           />
         </Link>
       ))}
