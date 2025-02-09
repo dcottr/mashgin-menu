@@ -2,6 +2,8 @@ import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
+const zPositiveInt = z.number().int().gt(0);
+
 export const menuRouter = createTRPCRouter({
   getCategories: publicProcedure.query(async ({ ctx }) => {
     const categories = await ctx.db.menuCategory.findMany({
@@ -18,7 +20,7 @@ export const menuRouter = createTRPCRouter({
   }),
 
   getCategoryName: publicProcedure
-    .input(z.object({ categoryID: z.number().int().gt(0) }))
+    .input(z.object({ categoryID: zPositiveInt }))
     .query(async ({ ctx, input }) => {
       const category = await ctx.db.menuCategory.findFirst({
         where: {
@@ -33,7 +35,7 @@ export const menuRouter = createTRPCRouter({
     }),
 
   getCategoryItems: publicProcedure
-    .input(z.object({ categoryID: z.number().int().gt(0) }))
+    .input(z.object({ categoryID: zPositiveInt }))
     .query(async ({ ctx, input }) => {
       const items = await ctx.db.menuItem.findMany({
         where: {
@@ -52,7 +54,7 @@ export const menuRouter = createTRPCRouter({
       return { items };
     }),
   getCartItems: publicProcedure
-    .input(z.object({ itemIDs: z.array(z.number().int().gt(0)) }))
+    .input(z.object({ itemIDs: z.array(zPositiveInt) }))
     .query(async ({ ctx, input }) => {
       const items = await ctx.db.menuItem.findMany({
         where: {
@@ -69,5 +71,27 @@ export const menuRouter = createTRPCRouter({
       });
 
       return { items };
+    }),
+  checkout: publicProcedure
+    .input(
+      z.object({
+        order: z.array(
+          z.object({
+            itemID: zPositiveInt,
+            quantity: z.number().int().gt(0),
+          })
+        ),
+        payment: z.object({
+          cardNumber: z.number().int(),
+          expiry: z.string().nonempty(),
+          cvv: z.number(),
+          name: z.string().nonempty(),
+        }),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      // TODO: Do some final validation, process the payment, and send the order to the kitchen
+      console.log("Received order: ", input);
+      return { success: true };
     }),
 });

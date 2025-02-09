@@ -36,7 +36,6 @@ export default function Payment(props: {
             type="number"
             value={cardNumber}
             onChange={(e) => setCardNumber(e.target.value)}
-            max={16}
             style={{
               minWidth: "100%",
               padding: "8px",
@@ -92,7 +91,6 @@ export default function Payment(props: {
               type="number"
               value={cvv}
               onChange={(e) => setCvv(e.target.value)}
-              max={4}
               style={{
                 width: "100%",
                 padding: "8px",

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useLocalStorage } from "~/app/hooks";
 import QuantityPicker from "~/app/_components/quantityPicker";
 import Payment from "~/app/_components/payment";
+import { useEffect } from "react";
 
 export default function Cart() {
   // Cart is a record of item IDs to quantities. It will be null until it's loaded from local storage.
@@ -27,6 +28,19 @@ export default function Cart() {
       suspense: true,
     }
   );
+  const checkout = api.menu.checkout.useMutation();
+
+  useEffect(() => {
+    if (checkout.isSuccess) {
+      setCart({}); // Wipe the cart after a successful checkout
+    }
+  }, [checkout.isSuccess]);
+
+  if (checkout.isSuccess) {
+    return (
+      <div>{"Thank you for your purchase, we've processed your order!"}</div>
+    );
+  }
 
   return cart && cartItems.data?.items?.length ? (
     <div
@@ -93,7 +107,20 @@ export default function Cart() {
       </div>
       <Payment
         onSubmit={(paymentData) => {
-          // TODO: Submit the payment
+          checkout.mutate({
+            order: itemIDsInCart.map((itemID) => {
+              return {
+                itemID,
+                quantity: cart[itemID] ?? 0,
+              };
+            }),
+            payment: {
+              name: paymentData.name,
+              cardNumber: +paymentData.cardNumber,
+              cvv: +paymentData.cvv,
+              expiry: paymentData.expiry,
+            },
+          });
         }}
       />
     </div>
