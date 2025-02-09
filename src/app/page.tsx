@@ -1,14 +1,8 @@
-"use client";
-
 import styles from "~/app/index.module.css";
 import Navbar from "~/app/_components/navbar";
-import dynamic from "next/dynamic";
+import Categories from "./categories";
 
-const Categories = dynamic(() => import("~/app/categories"), {
-  ssr: false,
-});
-
-export default function Page() {
+export default async function Page() {
   return (
     <>
       <Navbar title={"Menu"} hideHome />

@@ -1,22 +1,15 @@
-"use client";
+import { api } from "~/trpc/server";
 
-import { api } from "~/trpc/react";
 import styles from "~/app/index.module.css";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function Categories() {
-  const categories = api.menu.getCategories.useQuery();
+export default async function Categories() {
+  const { categories } = await api.menu.getCategories();
 
-  if (categories.error) {
-    <div className={styles.error}>
-      <p>{categories.error.message}</p>
-    </div>;
-  }
-
-  return categories.data ? (
+  return categories.length > 0 ? (
     <div className={styles.cardRow}>
-      {categories.data.categories.map((category) => (
+      {categories.map((category) => (
         <Link
           key={category.id}
           className={styles.card}
@@ -34,8 +27,6 @@ export default function Categories() {
         </Link>
       ))}
     </div>
-  ) : categories.isLoading ? (
-    <></> // TODO: spinner
   ) : (
     <div>{"No categories to choose from, check back later!"}</div>
   );
