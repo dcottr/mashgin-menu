@@ -24,6 +24,22 @@ export const menuRouter = createTRPCRouter({
 
     return { categories };
   }),
+
+  getCategoryName: publicProcedure
+    .input(z.object({ categoryID: z.number().int().gt(0) }))
+    .query(async ({ ctx, input }) => {
+      const category = await ctx.db.menuCategory.findFirst({
+        where: {
+          id: input.categoryID,
+        },
+        select: {
+          name: true,
+        },
+      });
+
+      return { name: category?.name ?? undefined };
+    }),
+
   getCategoryItems: publicProcedure
     .input(z.object({ categoryID: z.number().int().gt(0) }))
     .query(async ({ ctx, input }) => {
