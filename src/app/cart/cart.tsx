@@ -17,8 +17,8 @@ export default function Cart() {
   );
   const itemIDsInCart = cart
     ? Object.keys(cart)
-        .map((id) => +id)
-        .filter((id) => cart[id] ?? 0 > 0)
+        .map((id) => Number(id))
+        .filter((id) => (!isNaN(id) && cart[id]) ?? 0 > 0)
     : [];
 
   const cartItems = api.menu.getCartItems.useQuery(
@@ -138,8 +138,8 @@ export default function Cart() {
                 }),
                 payment: {
                   name: paymentData.name,
-                  cardNumber: +paymentData.cardNumber,
-                  cvv: +paymentData.cvv,
+                  cardNumber: paymentData.cardNumber,
+                  cvv: Number(paymentData.cvv),
                   expiry: paymentData.expiry,
                 },
               });

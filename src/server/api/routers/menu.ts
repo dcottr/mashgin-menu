@@ -83,17 +83,34 @@ export const menuRouter = createTRPCRouter({
           })
         ),
         payment: z.object({
-          cardNumber: z.number().int(),
-          expiry: z.string().nonempty(),
-          cvv: z.number(),
+          cardNumber: z
+            .string()
+            .length(16)
+            .regex(/^[0-9].*$/),
+          expiry: z
+            .string()
+            .nonempty()
+            .regex(/^\d{2}\/\d{2}$/),
+          cvv: z.number().int().gt(0).lte(9999),
           name: z.string().nonempty(),
         }),
       })
     )
     .mutation(async ({ ctx, input }) => {
       // TODO: process payments with input.payment & add payment details to the order
+      const [expiryMonth, expiryYear] = input.payment.expiry.split("/"); // Already validated by zod
+
       await ctx.db.order.create({
         data: {
+          paymentDetails: {
+            create: {
+              cardNumber: input.payment.cardNumber,
+              expiryMonth: Number(expiryMonth),
+              expiryYear: Number(input.payment.expiry.split("/")[1]),
+              cvv: input.payment.cvv,
+              nameOnCard: input.payment.name,
+            },
+          },
           orderItem: {
             createMany: {
               data: input.order.map((order) => ({

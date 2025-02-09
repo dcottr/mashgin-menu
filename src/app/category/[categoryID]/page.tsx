@@ -7,7 +7,7 @@ import Header from "~/app/category/[categoryID]/header";
 
 export default function Page() {
   const { categoryID } = useParams();
-  const categoryIDNumber = +(categoryID ?? "");
+  const categoryIDNumber = Number(categoryID ?? "") ?? 1;
   if (!categoryIDNumber) return notFound();
 
   return (
