@@ -9,9 +9,9 @@ import { useEffect, useState } from "react";
 
 export default function Cart() {
   // Cart is a record of item IDs to quantities. It will be null until it's loaded from local storage.
-  const [cart, setCart] = useLocalStorage<Record<number, number> | null>(
+  const [cart, setCart, cartIsLoaded] = useLocalStorage<Record<number, number>>(
     "cart",
-    null
+    {}
   );
   const itemIDsInCart = cart
     ? Object.keys(cart)
@@ -68,7 +68,7 @@ export default function Cart() {
         </div>
       )}
 
-      {cart && cartItems.data?.items?.length ? (
+      {cartItems.data?.items?.length ? (
         <div
           style={{
             display: "flex",
@@ -151,7 +151,7 @@ export default function Cart() {
             }}
           />
         </div>
-      ) : (cartItems.isLoading && itemIDsInCart.length > 0) || cart === null ? (
+      ) : cartItems.isLoading || !cartIsLoaded ? (
         <></>
       ) : (
         <div>{"Items you add to your cart will show up here"}</div>

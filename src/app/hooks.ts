@@ -2,21 +2,23 @@ import { useEffect, useState } from "react";
 
 const isServer = typeof window === "undefined";
 
+// Returns the value, a setter, and a boolean indicating if the value has been loaded from local storage
 export function useLocalStorage<T>(
   key: string,
   initialValue: T
-): [T, (cb: React.SetStateAction<T>) => void] {
+): [T, (cb: React.SetStateAction<T>) => void, boolean] {
   // State to store our value
   // Pass initial state function to useState so logic is only executed once
   const [storedValue, setStoredValue] = useState<T>(() => initialValue);
+  const [loaded, setLoaded] = useState<boolean>(false);
 
   const initialize = () => {
     if (isServer) {
       return initialValue;
     }
     try {
-      // Get from local storage by key
       const item = window.localStorage.getItem(key);
+      setLoaded(true);
       // Parse stored json or if none return initialValue
       return item ? (JSON.parse(item) as T) : initialValue;
     } catch (error) {
@@ -52,5 +54,5 @@ export function useLocalStorage<T>(
       console.log(error);
     }
   };
-  return [storedValue, setValue];
+  return [storedValue, setValue, loaded];
 }
