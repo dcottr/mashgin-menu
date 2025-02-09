@@ -13,7 +13,7 @@ async function main() {
         create: {
           name: category.name,
           imageURL: `https://8efhnqurvrogwnda.public.blob.vercel-storage.com/${category.imageID}.jpg`,
-          MenuItem: {
+          menuItem: {
             createMany: {
               data: category.items.map((item) => ({
                 name: item.name,

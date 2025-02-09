@@ -17,9 +17,9 @@ model MenuCategory {
 
     createdAt DateTime   @default(now())
     updatedAt DateTime   @updatedAt
-    MenuItem  MenuItem[]
+    menuItem  MenuItem[]
 
-    @@index([name])
+    @@index([id])
 }
 
 model MenuItem {
@@ -28,10 +28,35 @@ model MenuItem {
     imageURL     String
     priceInCents Int
     categoryID   Int
-    category     MenuCategory @relation(fields: [categoryID], references: [id])
+    Category     MenuCategory @relation(fields: [categoryID], references: [id])
+
+    createdAt DateTime    @default(now())
+    updatedAt DateTime    @updatedAt
+    orderItem OrderItem[]
+
+    @@index([id])
+}
+
+model OrderItem {
+    id       Int      @id @default(autoincrement())
+    quantity Int
+    itemID   Int
+    item     MenuItem @relation(fields: [itemID], references: [id])
+    orderId  Int
+    order    Order?   @relation(fields: [orderId], references: [id])
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    @@index([name])
+    @@index([id])
+}
+
+model Order {
+    id Int @id @default(autoincrement())
+
+    createdAt DateTime    @default(now())
+    updatedAt DateTime    @updatedAt
+    orderItem OrderItem[]
+
+    @@index([id])
 }
