@@ -11,9 +11,9 @@ datasource db {
 }
 
 model MenuCategory {
-    id       Int     @id @default(autoincrement())
+    id       Int    @id @default(autoincrement())
     name     String
-    imageURL String?
+    imageURL String
 
     createdAt DateTime   @default(now())
     updatedAt DateTime   @updatedAt

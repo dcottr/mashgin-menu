@@ -3,6 +3,7 @@ import data from "./data.json";
 
 const prisma = new PrismaClient();
 
+// TODO: Figure out why bun can't run the seed directly when running `bun run db:generate`
 async function main() {
   await Promise.all(
     data.categories.map((category) =>
