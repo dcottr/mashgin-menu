@@ -6,7 +6,7 @@ export default function QuantityPicker(props: {
   quantity: number;
   setQuantity: (value: number) => void;
 }) {
-  // Use isEditing to not switch the input field mid-changing it
+  // Use isEditing to not switch the input field mid-typing it
   const [isEditing, setIsEditing] = useState(false);
 
   return props.quantity == 0 && !isEditing ? (
@@ -29,7 +29,7 @@ export default function QuantityPicker(props: {
     >
       <input
         type="number"
-        style={{ width: "5rem" }}
+        className={styles.quantityPicker}
         name="amount"
         min="0"
         value={props.quantity}

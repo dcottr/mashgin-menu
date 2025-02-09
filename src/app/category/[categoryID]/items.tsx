@@ -4,8 +4,9 @@ import Image from "next/image";
 
 import { api } from "~/trpc/react";
 import styles from "~/app/index.module.css";
-import { useLocalStorage } from "~/app/hooks";
+import { useCartStorage } from "~/app/hooks";
 import QuantityPicker from "~/app/_components/quantityPicker";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export function Items(props: { categoryID: number }) {
   const categoryItems = api.menu.getCategoryItems.useQuery({
@@ -13,7 +14,7 @@ export function Items(props: { categoryID: number }) {
   });
 
   // Cart is a record of item IDs to quantities
-  const [cart, setCart] = useLocalStorage<Record<number, number>>("cart", {});
+  const [cart, setCart] = useCartStorage();
 
   if (categoryItems.error) {
     <div className={styles.error}>
@@ -50,17 +51,14 @@ export function Items(props: { categoryID: number }) {
             </h3>
             <QuantityPicker
               quantity={cart[item.id] ?? 0}
-              setQuantity={(value) =>
-                // Set to undefined to wipe-out the key entry
-                setCart({ ...cart, [item.id]: value ?? undefined })
-              }
+              setQuantity={(value) => setCart({ ...cart, [item.id]: value })}
             />
           </div>
         </div>
       ))}
     </div>
   ) : categoryItems.isLoading ? (
-    <></> // TODO: spinner
+    <CircularProgress />
   ) : (
     <div>{"We're all out of stock, sorry!"}</div>
   );

@@ -28,3 +28,8 @@ This is built using [T3 Stack](https://create.t3.gg/)
 - [Next.js](https://nextjs.org)
 - [Prisma](https://prisma.io)
 - [tRPC](https://trpc.io)
+- [MySQL](https://mysql.com)
+
+## Deployment
+
+Continuous deployment is set up on Vercel, and image blobs are stored in Vercel blob storage. The MySQL database is running on DigitalOcean.

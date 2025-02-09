@@ -5,40 +5,37 @@ import Image from "next/image";
 
 import styles from "~/app/index.module.css";
 import { api } from "~/trpc/react";
-import { useLocalStorage } from "~/app/hooks";
+import { useCartStorage } from "~/app/hooks";
 import Payment from "~/app/cart/payment";
 import QuantityPicker from "~/app/_components/quantityPicker";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Cart() {
-  // Cart is a record of item IDs to quantities. It will be null until it's loaded from local storage.
-  const [cart, setCart, cartIsLoaded] = useLocalStorage<Record<number, number>>(
-    "cart",
-    {}
-  );
+  const [cart, setCart, cartIsLoaded] = useCartStorage();
   const itemIDsInCart = cart
     ? Object.keys(cart)
         .map((id) => Number(id))
         .filter((id) => (!isNaN(id) && cart[id]) ?? 0 > 0)
     : [];
 
-  const cartItems = api.menu.getCartItems.useQuery(
+  const cartItems = api.order.getCartItems.useQuery(
     {
       itemIDs: itemIDsInCart,
     },
     {
       enabled: itemIDsInCart.length > 0,
-      suspense: true,
+      suspense: false,
     }
   );
   const [errorMessage, setErrorMessage] = useState<string>();
-  const checkout = api.menu.checkout.useMutation({
+  const checkout = api.order.checkout.useMutation({
     onError: (error) => {
-      setErrorMessage("Failed to check out, please try again later");
+      setErrorMessage("Something went wrong");
     },
   });
 
   useEffect(() => {
-    setErrorMessage(undefined);
+    setErrorMessage(undefined); // Clear on any cart change so it doesn't linger
   }, [cart]);
 
   useEffect(() => {
@@ -113,8 +110,7 @@ export default function Cart() {
                     <QuantityPicker
                       quantity={cart[item.id] ?? 0}
                       setQuantity={(value) =>
-                        // Set to undefined to wipe-out the key entry
-                        setCart({ ...cart, [item.id]: value ?? undefined })
+                        setCart({ ...cart, [item.id]: value })
                       }
                     />
                   </div>
@@ -174,7 +170,7 @@ export default function Cart() {
           />
         </div>
       ) : cartItems.isLoading || !cartIsLoaded ? (
-        <></>
+        <CircularProgress />
       ) : (
         <div>{"Items you add to your cart will show up here"}</div>
       )}

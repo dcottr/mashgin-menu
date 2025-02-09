@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import styles from "~/app/index.module.css";
+
 export default function Payment(props: {
   setError: (errorMessage: string) => void;
   onSubmit: (params: {
@@ -18,7 +20,7 @@ export default function Payment(props: {
     <div
       style={{
         maxWidth: "400px",
-        padding: "20px",
+        padding: "1.5rem",
         border: "1px solid #ccc",
         borderRadius: "10px",
         boxShadow: "2px 2px 10px rgba(0,0,0,0.1)",
@@ -48,12 +50,7 @@ export default function Payment(props: {
             type="number"
             value={cardNumber}
             onChange={(e) => setCardNumber(e.target.value)}
-            style={{
-              minWidth: "100%",
-              padding: "8px",
-              borderRadius: "5px",
-              border: "1px solid #ccc",
-            }}
+            className={styles.creditCardInput}
             placeholder="1234 1234 1234 1234"
           />
         </div>
@@ -63,12 +60,7 @@ export default function Payment(props: {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "8px",
-              borderRadius: "5px",
-              border: "1px solid #ccc",
-            }}
+            className={styles.creditCardInput}
             placeholder="John Doe"
           />
         </div>
@@ -88,12 +80,7 @@ export default function Payment(props: {
                   setExpiry(e.target.value);
                 }
               }}
-              style={{
-                width: "100%",
-                padding: "8px",
-                borderRadius: "5px",
-                border: "1px solid #ccc",
-              }}
+              className={styles.creditCardInput}
               placeholder="MM/YY"
             />
           </div>
@@ -103,12 +90,7 @@ export default function Payment(props: {
               type="number"
               value={cvv}
               onChange={(e) => setCvv(e.target.value)}
-              style={{
-                width: "100%",
-                padding: "8px",
-                borderRadius: "5px",
-                border: "1px solid #ccc",
-              }}
+              className={styles.creditCardInput}
               placeholder="123"
             />
           </div>
@@ -116,13 +98,14 @@ export default function Payment(props: {
         <button
           style={{
             width: "100%",
-            padding: "10px",
+            padding: "0.75rem",
             backgroundColor: "#007bff",
             color: "white",
             border: "none",
             borderRadius: "5px",
             cursor: "pointer",
           }}
+          className={styles.styledButton}
         >
           Check Out
         </button>
