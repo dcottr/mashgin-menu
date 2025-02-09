@@ -12,10 +12,6 @@ export const menuRouter = createTRPCRouter({
     }),
 
   getCategories: publicProcedure.query(async ({ ctx }) => {
-    if (!ctx.db) {
-      throw new Error("No database connection");
-    }
-
     const categories = await ctx.db.menuCategory.findMany({
       select: {
         id: true,
@@ -23,7 +19,7 @@ export const menuRouter = createTRPCRouter({
         imageURL: true,
       },
       orderBy: { createdAt: "desc" },
-      take: 30, // TODO: Paginate if we ever need more
+      take: 30, // Add pagination if we need more
     });
 
     return { categories };

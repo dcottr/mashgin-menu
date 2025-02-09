@@ -25,7 +25,7 @@ model MenuCategory {
 model MenuItem {
     id           Int          @id @default(autoincrement())
     name         String
-    imageURL     String?
+    imageURL     String
     priceInCents Int
     categoryID   Int
     category     MenuCategory @relation(fields: [categoryID], references: [id])

@@ -18,6 +18,9 @@
     "start": "next start",
     "typecheck": "tsc --noEmit"
   },
+  "prisma": {
+    "seed": "node utils/seed.ts"
+  },
   "dependencies": {
     "@prisma/client": "^5.14.0",
     "@t3-oss/env-nextjs": "^0.10.1",

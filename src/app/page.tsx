@@ -5,8 +5,6 @@ import { HydrateClient } from "~/trpc/server";
 import styles from "./index.module.css";
 
 export default async function Home() {
-  // Cart and stuff stored locally
-
   return (
     <HydrateClient>
       <main className={styles.main}>

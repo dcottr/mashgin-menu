@@ -17,3 +17,5 @@ $ bun install
 $ ./start-database.sh
 $ bun run dev
 ```
+
+To seed the database with the example data run `$ bun run prisma/seed.ts`

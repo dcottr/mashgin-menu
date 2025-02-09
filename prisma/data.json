@@ -1,0 +1,80 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "imageID": "f3fbf57b118fa9",
+      "name": "Bakery",
+      "items": [
+        {
+          "imageID": "293202f9d9f7f4",
+          "name": "Bagel",
+          "price": 2.0
+        },
+        {
+          "imageID": "808916fd5ddf96",
+          "name": "Croissant",
+          "price": 1.0
+        },
+        {
+          "imageID": "95d02a230fe050",
+          "name": "Muffin",
+          "price": 1.25
+        },
+        {
+          "imageID": "23f95765b967ff",
+          "name": "Toast / Bread",
+          "price": 1
+        },
+        {
+          "imageID": "5650be5d48a99b",
+          "name": "English Muffin",
+          "price": 2.5
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "imageID": "b271afbefdc554",
+      "name": "Entrees",
+      "items": [
+        {
+          "imageID": "bd237a0c0d19ef",
+          "name": "Pasta Bar",
+          "price": 12.99
+        },
+        {
+          "imageID": "3e1bd1342800f7",
+          "name": "Mediterranean Entree",
+          "price": 10.99
+        },
+        {
+          "imageID": "72589c4c990f97",
+          "name": "Indian Entree",
+          "price": 11.95
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "imageID": "eba73b2361fae3",
+      "name": "Drinks",
+      "items": [
+        {
+          "imageID": "70c2a6247e7b58",
+          "name": "Small Drink",
+          "price": 0.75
+        },
+        {
+          "imageID": "dba0fc03da30ca",
+          "name": "Medium Drink",
+          "price": 1.5
+        },
+        {
+          "imageID": "ffc9bf61e441cd",
+          "name": "Large Drink",
+          "price": 2
+        }
+      ]
+    }
+  ]
+}
