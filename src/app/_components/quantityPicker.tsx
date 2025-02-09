@@ -11,6 +11,7 @@ export default function QuantityPicker(props: {
 
   return props.quantity == 0 && !isEditing ? (
     <button
+      style={{ height: "2.5rem", minWidth: "7.5rem" }}
       className={styles.styledButton}
       onClick={() => props.setQuantity(1)}
     >
@@ -28,6 +29,7 @@ export default function QuantityPicker(props: {
     >
       <input
         type="number"
+        style={{ width: "5rem" }}
         name="amount"
         min="0"
         value={props.quantity}

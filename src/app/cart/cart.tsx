@@ -108,7 +108,8 @@ export default function Cart() {
                       display: "flex",
                       flexDirection: "row",
                       alignItems: "center",
-                      gap: "0.5rem",
+                      gap: "0.25rem",
+                      flexWrap: "wrap",
                     }}
                   >
                     <h3>${(item.priceInCents / 100).toFixed(2)}</h3>

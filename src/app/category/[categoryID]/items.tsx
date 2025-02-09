@@ -33,17 +33,21 @@ export function Items(props: { categoryID: number }) {
             className={styles.cardImage}
             priority
           />
+          <h3 className={styles.cardTitle}>{item.name}</h3>
 
           <div
             style={{
+              height: "3rem",
               display: "flex",
               flexDirection: "row",
               justifyContent: "space-between",
               alignItems: "center",
+              gap: "0.1rem",
             }}
           >
-            {" "}
-            <h3 className={styles.cardTitle}>{item.name}</h3>
+            <h3 className={styles.cardTitle}>
+              ${(item.priceInCents / 100).toFixed(2)}
+            </h3>
             <QuantityPicker
               quantity={cart[item.id] ?? 0}
               setQuantity={(value) =>
@@ -52,9 +56,6 @@ export function Items(props: { categoryID: number }) {
               }
             />
           </div>
-          <h3 className={styles.cardTitle}>
-            ${(item.priceInCents / 100).toFixed(2)}
-          </h3>
         </div>
       ))}
     </div>

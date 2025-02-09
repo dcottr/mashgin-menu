@@ -91,8 +91,19 @@ export const menuRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      // TODO: Do some final validation of CC, process the payment, and send the order to the kitchen
-      console.log("Received order: ", input);
+      // TODO: process payments with input.payment & add payment details to the order
+      await ctx.db.order.create({
+        data: {
+          orderItem: {
+            createMany: {
+              data: input.order.map((order) => ({
+                itemID: order.itemID,
+                quantity: order.quantity,
+              })),
+            },
+          },
+        },
+      });
       return { success: true };
     }),
 });

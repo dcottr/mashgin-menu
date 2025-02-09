@@ -1,10 +1,10 @@
 # Mashgin Menu
 
-The app is live on https://mashgin-menu-self.vercel.app when an order comes in it just logs the order & payment details (please don't put a real credit card in!)
+The app is live on https://mashgin-menu-self.vercel.app
 
 The backend endpoints are in server/routers/menu.ts
 
-The frontend app is in app/
+The frontend app components live in app/
 
 ## Building Locally
 
