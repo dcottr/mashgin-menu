@@ -1,25 +1,24 @@
+"use client";
+
 import { Items } from "~/app/category/[categoryID]/items";
-import { HydrateClient } from "~/trpc/server";
 import styles from "~/app/index.module.css";
 import { notFound } from "next/navigation";
 import Header from "~/app/category/[categoryID]/header";
+import { useParams } from "next/navigation";
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ categoryID: string }>;
-}) {
-  const categoryIDNumber = +(await params).categoryID;
+export default function Page() {
+  const { categoryID } = useParams();
+  const categoryIDNumber = +(categoryID ?? "");
   if (!categoryIDNumber) return notFound();
 
   return (
-    <HydrateClient>
+    <>
       <Header categoryID={categoryIDNumber} />
       <main className={styles.main}>
         <div className={styles.container}>
           <Items categoryID={categoryIDNumber} />
         </div>
       </main>
-    </HydrateClient>
+    </>
   );
 }

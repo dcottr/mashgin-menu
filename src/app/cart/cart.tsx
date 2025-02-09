@@ -6,7 +6,6 @@ import { useLocalStorage } from "~/app/hooks";
 import QuantityPicker from "~/app/_components/quantityPicker";
 import Payment from "~/app/cart/payment";
 import { useEffect, useState } from "react";
-import { error } from "console";
 
 export default function Cart() {
   // Cart is a record of item IDs to quantities. It will be null until it's loaded from local storage.

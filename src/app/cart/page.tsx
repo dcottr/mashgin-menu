@@ -1,10 +1,14 @@
-import { HydrateClient } from "~/trpc/server";
+"use client";
 import Navbar from "~/app/_components/navbar";
-import Cart from "~/app/cart/cart";
+import dynamic from "next/dynamic";
 
-export default async function Home() {
+const Cart = dynamic(() => import("~/app/cart/cart"), {
+  ssr: false,
+});
+
+export default function Page() {
   return (
-    <HydrateClient>
+    <>
       <Navbar title={"Cart"} hideCart />
       <main>
         <div
@@ -21,6 +25,6 @@ export default async function Home() {
           <Cart />
         </div>
       </main>
-    </HydrateClient>
+    </>
   );
 }

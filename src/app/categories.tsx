@@ -5,7 +5,7 @@ import styles from "~/app/index.module.css";
 import Link from "next/link";
 import Image from "next/image";
 
-export function Categories() {
+export default function Categories() {
   const [menuCategories] = api.menu.getCategories.useSuspenseQuery();
 
   return menuCategories ? (
