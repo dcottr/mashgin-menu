@@ -91,6 +91,8 @@ export default function Cart() {
                       flexDirection: "row",
                       alignItems: "center",
                       gap: "0.5rem",
+                      flex: 1,
+                      maxWidth: "600px",
                     }}
                   >
                     <Image
@@ -100,18 +102,12 @@ export default function Cart() {
                       height={50}
                       priority
                     />
-                    <h3>{item.name}</h3>
-                  </div>
-                  <div style={{ flexGrow: 1, width: "100px" }} />
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      gap: "0.25rem",
-                      flexWrap: "wrap",
-                    }}
-                  >
+                    <h3 style={{ textWrap: "wrap" }}>{item.name}</h3>
+                    <div
+                      style={{
+                        flexGrow: 1,
+                      }}
+                    />
                     <h3>${(item.priceInCents / 100).toFixed(2)}</h3>
 
                     <QuantityPicker
@@ -125,6 +121,37 @@ export default function Cart() {
                 </div>
               </div>
             ))}
+
+            {/* These 2 divs are for creating a separation line from the total */}
+            <div style={{ height: "1rem" }} />
+            <div
+              style={{
+                height: "1px",
+                width: "100%",
+                backgroundColor: "lightgray",
+              }}
+            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              <h3>Total:</h3>
+              <h3>
+                $
+                {(
+                  cartItems.data.items.reduce(
+                    (sum, nextItem) =>
+                      sum + nextItem.priceInCents * (cart[nextItem.id] ?? 0), // Shouldn't be undefined in practice
+                    0
+                  ) / 100
+                ).toFixed(2)}
+              </h3>
+            </div>
           </div>
           <Payment
             setError={setErrorMessage}
