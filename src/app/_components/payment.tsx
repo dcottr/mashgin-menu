@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 export default function Payment(props: {
+  setError: (errorMessage: string) => void;
   onSubmit: (params: {
     cardNumber: string;
     expiry: string;
@@ -27,7 +28,18 @@ export default function Payment(props: {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          props.onSubmit({ cardNumber, expiry, cvv, name });
+          console.log(name);
+          if (!cardNumber || cardNumber.toString().length < 16) {
+            props.setError("Card number must be 16 digits");
+          } else if (!expiry || expiry.length < 5) {
+            props.setError("Expirty should be MM/YY");
+          } else if (!cvv || cvv.length < 3) {
+            props.setError("CVV should be at least 3 digits");
+          } else if (!name) {
+            props.setError("Name is required");
+          } else {
+            props.onSubmit({ cardNumber, expiry, cvv, name });
+          }
         }}
       >
         <div>

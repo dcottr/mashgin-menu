@@ -1,11 +1,15 @@
 import CloseIcon from "@mui/icons-material/Close";
+import { useState } from "react";
 import styles from "~/app/index.module.css";
 
 export default function QuantityPicker(props: {
   quantity: number;
   setQuantity: (value: number) => void;
 }) {
-  return props.quantity == 0 ? (
+  // Use isEditing to not switch the input field mid-changing it
+  const [isEditing, setIsEditing] = useState(false);
+
+  return props.quantity == 0 && !isEditing ? (
     <button
       className={styles.styledButton}
       onClick={() => props.setQuantity(1)}
@@ -28,6 +32,8 @@ export default function QuantityPicker(props: {
         min="0"
         value={props.quantity}
         onChange={(e) => props.setQuantity(+e.target.value)}
+        onFocus={() => setIsEditing(true)}
+        onBlur={() => setIsEditing(false)}
       />
       <button
         className={styles.borderlessButton}
