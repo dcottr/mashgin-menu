@@ -7,7 +7,11 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import styles from "~/app/index.module.css";
 
-const Navbar = (props: { title: string; hideCart?: boolean }) => {
+const Navbar = (props: {
+  title: string;
+  hideCart?: boolean;
+  hideHome?: boolean;
+}) => {
   return (
     <>
       <div
@@ -23,9 +27,13 @@ const Navbar = (props: { title: string; hideCart?: boolean }) => {
           padding: "0.75rem 0.75rem",
         }}
       >
-        <Link href="/">
-          <HomeIcon style={{ color: "white", fontSize: "2rem" }} />
-        </Link>
+        {props.hideHome ? (
+          <div></div>
+        ) : (
+          <Link href="/">
+            <HomeIcon style={{ color: "white", fontSize: "2rem" }} />
+          </Link>
+        )}
         <div className={styles.title}>{props.title}</div>
         {props.hideCart ? (
           <div></div>

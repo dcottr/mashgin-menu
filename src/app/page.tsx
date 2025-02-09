@@ -11,7 +11,7 @@ const Categories = dynamic(() => import("~/app/categories"), {
 export default function Page() {
   return (
     <>
-      <Navbar title={"Menu"} />
+      <Navbar title={"Menu"} hideHome />
       <main className={styles.main}>
         <div className={styles.container}>
           <Categories />
